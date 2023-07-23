@@ -1,4 +1,4 @@
-<template>
+<template id="status-car">
     <div class="container">
         <div class="container-inputs">
             <h1>Car status</h1>
@@ -18,7 +18,6 @@
         </div>
         <br>
         <div class="container-map">
-            <OpenLayersMap />
         </div>
         <br>
         <div class="container-carsTable">
@@ -50,12 +49,19 @@
 </template>
 
 <script>
-import OpenLayersMap from './OpenLayersMap.vue'
+import Vue from 'vue'
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
+
+Vue.use(Toast, {
+  transition: 'Vue-Toastification__bounce',
+  maxToasts: 20,
+  newestOnTop: true
+})
 
 export default{
   name: 'CarStatus',
   components: {
-    OpenLayersMap
   },
   data () {
     return {
@@ -70,6 +76,9 @@ export default{
   methods: {
     async getCars () {
       try {
+        if (this.totalCarsToGenerate < 100 || this.totalCarsToGenerate > 500) {
+          this.createNotification()
+        }
         await fetch('http://localhost:8081/getcars?generateCars=' + this.totalCarsToGenerate)
           .then(response => response.json())
           .then(data => (this.carsList = data.message))
@@ -108,6 +117,22 @@ export default{
       setInterval(() => {
         this.getCars()
       }, 30000)
+    },
+    createNotification () {
+      this.$toast.info('Počet min-max vozidiel musí byť 100-500', {
+        position: 'bottom-left',
+        timeout: 5000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: 'button',
+        icon: true,
+        rtl: false
+      })
     }
   },
   mounted () {
