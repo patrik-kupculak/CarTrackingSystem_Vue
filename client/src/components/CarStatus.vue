@@ -18,6 +18,7 @@
         </div>
         <br>
         <div class="container-map">
+          <Map :location="carsList.location"/>
         </div>
         <br>
         <div class="container-carsTable">
@@ -52,6 +53,7 @@
 import Vue from 'vue'
 import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
+import Map from './Map.vue'
 
 Vue.use(Toast, {
   transition: 'Vue-Toastification__bounce',
@@ -62,6 +64,7 @@ Vue.use(Toast, {
 export default{
   name: 'CarStatus',
   components: {
+    Map
   },
   data () {
     return {
@@ -178,7 +181,7 @@ export default{
 .container-map {
     border: 1px solid black;
     text-align: center;
-    padding: 10px 0
+    height: 20em;
 }
 
 /* Cars table */

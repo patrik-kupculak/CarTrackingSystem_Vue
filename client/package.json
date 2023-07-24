@@ -15,10 +15,13 @@
   },
   "dependencies": {
     "ol": "^7.4.0",
+    "ol-contextmenu": "^5.2.1",
+    "ol-ext": "^4.0.10",
     "vue": "^2.7.14",
     "vue-router": "^3.0.1",
     "vue-toast-notification": "^3.1.1",
-    "vue-toastification": "^1.7.14"
+    "vue-toastification": "^1.7.14",
+    "vue3-openlayers": "^1.0.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.9",
